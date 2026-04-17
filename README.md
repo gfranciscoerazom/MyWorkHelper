@@ -1,0 +1,1 @@
+Es una aplicación web diseñada para optimizar el flujo de trabajo entre desarrolladores y diseñadores en agencias de marketing. La plataforma permite generar solicitudes de imágenes con parámetros técnicos específicos (dimensiones, peso y formato) y asignarlas automáticamente al diseñador.
