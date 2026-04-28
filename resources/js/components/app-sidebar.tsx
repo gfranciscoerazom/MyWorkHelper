@@ -1,5 +1,3 @@
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -15,19 +13,30 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import assetsSolicitations from '@/routes/assets-solicitations';
 import type { NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen, FolderGit2, Image, LayoutGrid } from 'lucide-react';
 
 export function AppSidebar() {
     const page = usePage();
     const dashboardUrl = page.props.currentTeam
         ? dashboard(page.props.currentTeam.slug)
         : '/';
+    const assetsSolicitationsUrl = page.props.currentTeam
+        ? assetsSolicitations.index(page.props.currentTeam.slug)
+        : '/assets-solicitations';
 
     const mainNavItems: NavItem[] = [
         {
             title: 'Dashboard',
             href: dashboardUrl,
             icon: LayoutGrid,
+        },
+        {
+            title: 'Assets Solicitations',
+            href: assetsSolicitationsUrl,
+            icon: Image,
         },
     ];
 

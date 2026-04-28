@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Run assets solicitations seeder
+        $this->call([AssetsSolicitationSeeder::class]);
     }
 }

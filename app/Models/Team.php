@@ -82,6 +82,16 @@ class Team extends Model
     }
 
     /**
+     * Get all assets solicitations for this team.
+     *
+     * @return HasMany<AssetsSolicitation, $this>
+     */
+    public function assetsSolicitations(): HasMany
+    {
+        return $this->hasMany(AssetsSolicitation::class);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
