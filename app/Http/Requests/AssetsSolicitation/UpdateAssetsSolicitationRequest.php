@@ -5,9 +5,13 @@ namespace App\Http\Requests\AssetsSolicitation;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use SanderMuller\FluentValidation\FluentRule;
+use SanderMuller\FluentValidation\HasFluentRules;
 
 class UpdateAssetsSolicitationRequest extends FormRequest
 {
+    use HasFluentRules;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,9 +28,9 @@ class UpdateAssetsSolicitationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['sometimes', 'required', 'string',  'min:5', 'max:255'],
-            'description' => ['sometimes', 'required', 'string', 'min:5'],
-            'provider_id' => ['sometimes', 'required', 'exists:users,id'],
+            'title' => FluentRule::string()->sometimes()->required()->min(5)->max(255),
+            'description' => FluentRule::string()->sometimes()->required()->min(5),
+            'provider_id' => FluentRule::numeric()->sometimes()->required()->exists('users', 'id'),
         ];
     }
 }
