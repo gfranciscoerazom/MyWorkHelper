@@ -11,6 +11,7 @@ use App\Notifications\AssetsSolicitation\AssetsSolicitationSended;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Attributes\Controllers\Authorize;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class AssetsSolicitationController extends Controller
@@ -76,15 +77,24 @@ class AssetsSolicitationController extends Controller
      */
     public function store(StoreAssetsSolicitationRequest $request)
     {
-        $assetsSolicitation = AssetsSolicitation::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'requester_id' => Auth::id(),
-            'provider_id' => $request->provider_id,
-            'team_id' => Auth::user()->currentTeam->id,
-        ]);
+        $user = $request->user();
+        $teamId = $user->currentTeam->id;
 
-        User::find($assetsSolicitation->provider_id)->notify(new AssetsSolicitationSended($assetsSolicitation));
+        $attributes = $request
+            ->safe()
+            ->merge([
+                'team_id' => $teamId,
+            ])
+            ->all();
+
+        $assetsSolicitation = DB::transaction(function () use ($user, $attributes) {
+            $solicitation = $user->assetsSolicitationsRequested()->create($attributes);
+            $solicitation->assets()->createMany($attributes['assets']);
+
+            return $solicitation;
+        });
+
+        User::find($assetsSolicitation->provider_id)?->notify(new AssetsSolicitationSended($assetsSolicitation));
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Assets solicitation created successfully.')]);
 

@@ -97,12 +97,12 @@ export default function CreateAssetsSolicitation({ team_members }: { team_member
                                         <Card key={index}>
                                             <CardContent>
                                                 <FieldGroup>
-                                                    {/* Asset Title */}
+                                                    {/* Asset Name */}
                                                     <InputField
-                                                        name={`assets[${index}][title]`}
+                                                        name={`assets[${index}][name]`}
                                                         type="text"
-                                                        label="Title of the asset"
-                                                        description="Provide a concise and descriptive title for your asset  (This title is going to be used when you download the asset after it is provided)."
+                                                        label="Name of the asset"
+                                                        description="Provide a concise and descriptive name for your asset  (This name is going to be used when you download the asset after it is provided)."
                                                         placeholder="E.g., Request for New Laptop Photo"
                                                     />
                                                     {/* Asset Description */}
