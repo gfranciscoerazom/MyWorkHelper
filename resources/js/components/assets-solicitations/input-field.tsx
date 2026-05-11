@@ -1,6 +1,6 @@
-import { toDottedName } from "@/lib/utils";
 import { useFormContext } from "@inertiajs/react";
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
+import { toDottedName } from "@/lib/utils";
 import InputError from "../input-error";
 import { Field, FieldDescription, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";

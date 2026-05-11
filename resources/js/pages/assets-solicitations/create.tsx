@@ -1,3 +1,6 @@
+import { Form, Head, Link, router, usePage } from '@inertiajs/react';
+import { Minus, Plus } from 'lucide-react';
+import { useState } from 'react';
 import { InputField } from '@/components/assets-solicitations/input-field';
 import { SwitchContainer } from '@/components/assets-solicitations/switch-container';
 import { Button } from '@/components/ui/button';
@@ -9,9 +12,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { TeamMember } from '@/types';
-import { Form, Head, Link, router, usePage } from '@inertiajs/react';
-import { Minus, Plus } from 'lucide-react';
-import { useState } from 'react';
 
 type CreateAssetsSolicitationProps = {
     readonly team_members: TeamMember[];
@@ -19,10 +19,6 @@ type CreateAssetsSolicitationProps = {
 
 export default function CreateAssetsSolicitation({ team_members }: CreateAssetsSolicitationProps) {
     const { currentTeam } = usePage().props;
-
-    if (!currentTeam) {
-        return router.visit(home(), { replace: true });
-    }
 
     const [assetsFieldsSettings, setAssetsFieldsSettings] = useState([
         {
@@ -33,6 +29,10 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
             quantity: true,
         }
     ]);
+
+    if (!currentTeam) {
+        return router.visit(home(), { replace: true });
+    }
 
     return (
         <>
@@ -128,6 +128,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                                                 setAssetsFieldsSettings((prev) => {
                                                                     const newSettings = [...prev];
                                                                     newSettings[index].required = checked;
+
                                                                     return newSettings;
                                                                 });
                                                             }}
@@ -143,6 +144,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                                                 setAssetsFieldsSettings((prev) => {
                                                                     const newSettings = [...prev];
                                                                     newSettings[index].size = checked;
+
                                                                     return newSettings;
                                                                 });
                                                             }}
@@ -196,6 +198,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                                                 setAssetsFieldsSettings((prev) => {
                                                                     const newSettings = [...prev];
                                                                     newSettings[index].dimensions = checked;
+
                                                                     return newSettings;
                                                                 });
                                                             }}
@@ -297,6 +300,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                                                 setAssetsFieldsSettings((prev) => {
                                                                     const newSettings = [...prev];
                                                                     newSettings[index].quantity = checked;
+
                                                                     return newSettings;
                                                                 });
                                                             }}
@@ -350,6 +354,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                                                 setAssetsFieldsSettings((prev) => {
                                                                     const newSettings = [...prev];
                                                                     newSettings[index].extension = checked;
+
                                                                     return newSettings;
                                                                 });
                                                             }}

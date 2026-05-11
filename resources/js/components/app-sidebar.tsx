@@ -1,3 +1,5 @@
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen, FolderGit2, Image, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -15,8 +17,6 @@ import {
 import { dashboard } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { NavItem } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, Image, LayoutGrid } from 'lucide-react';
 
 export function AppSidebar() {
     const page = usePage();

@@ -1,3 +1,5 @@
+import { Form, Head, Link, router, usePage } from '@inertiajs/react';
+import { Trash } from 'lucide-react';
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -9,8 +11,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { AssetsSolicitation, TeamMember } from '@/types';
-import { Form, Head, Link, router, usePage } from '@inertiajs/react';
-import { Trash } from 'lucide-react';
 
 type UpdateAssetsSolicitationProps = {
     readonly team_members: TeamMember[];

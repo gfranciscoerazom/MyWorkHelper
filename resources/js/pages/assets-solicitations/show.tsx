@@ -1,8 +1,8 @@
+import { Head } from "@inertiajs/react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import assetsSolicitations from "@/routes/assets-solicitations";
-import { AssetsSolicitation } from "@/types";
-import { Head } from "@inertiajs/react";
+import type { AssetsSolicitation } from "@/types";
 
 export default function ShowAssetsSolicitation({ assetsSolicitation }: { assetsSolicitation: AssetsSolicitation }) {
     return (

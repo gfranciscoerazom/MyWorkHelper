@@ -1,12 +1,12 @@
+import { Head, InfiniteScroll, Link, router, usePage } from '@inertiajs/react';
+import { Image, Plus } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import assetsSolicitations from '@/routes/assets-solicitations';
-import { AssetsSolicitations } from '@/types';
-import { Head, InfiniteScroll, Link, router, usePage } from '@inertiajs/react';
-import { Image, Plus } from 'lucide-react';
+import type { AssetsSolicitations } from '@/types';
 
 
 
