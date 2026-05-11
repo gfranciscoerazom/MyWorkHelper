@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\AssetsSolicitationStatus;
 use Database\Factories\AssetsSolicitationFactory;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,12 @@ class AssetsSolicitation extends Model
      * @use HasFactory<AssetsSolicitationFactory>
      * @use SoftDeletes
      * */
-    use HasFactory, SoftDeletes;
+    use CascadeSoftDeletes, HasFactory, SoftDeletes;
+
+    /**
+     * The relationships that should be soft deleted.
+     */
+    protected $cascadeDeletes = ['assets'];
 
     /**
      * Requester (user who asked for the asset).

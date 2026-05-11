@@ -107,7 +107,7 @@ class AssetsSolicitationController extends Controller
     #[Authorize('view', ['assetsSolicitation'])]
     public function show(Team $current_team, AssetsSolicitation $assetsSolicitation)
     {
-        $assetsSolicitation->load(['requester', 'provider']);
+        $assetsSolicitation->load(['requester', 'provider', 'assets']);
 
         return Inertia::render('assets-solicitations/show', [
             'assetsSolicitation' => $assetsSolicitation,
@@ -120,7 +120,7 @@ class AssetsSolicitationController extends Controller
     #[Authorize('update', ['assetsSolicitation'])]
     public function edit(Team $current_team, AssetsSolicitation $assetsSolicitation)
     {
-        $assetsSolicitation->load(['requester', 'provider']);
+        $assetsSolicitation->load(['requester', 'provider', 'assets']);
 
         $team_members = Auth::user()
             ->currentTeam

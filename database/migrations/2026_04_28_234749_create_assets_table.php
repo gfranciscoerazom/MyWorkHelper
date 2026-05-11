@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('asset_path')->nullable();
             $table->foreignIdFor(AssetsSolicitation::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

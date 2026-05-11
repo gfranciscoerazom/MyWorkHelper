@@ -8,12 +8,16 @@ import { Spinner } from '@/components/ui/spinner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
-import { TeamMember } from '@/types';
+import type { TeamMember } from '@/types';
 import { Form, Head, Link, router, usePage } from '@inertiajs/react';
 import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 
-export default function CreateAssetsSolicitation({ team_members }: { team_members: TeamMember[]; }) {
+type CreateAssetsSolicitationProps = {
+    readonly team_members: TeamMember[];
+};
+
+export default function CreateAssetsSolicitation({ team_members }: CreateAssetsSolicitationProps) {
     const { currentTeam } = usePage().props;
 
     if (!currentTeam) {

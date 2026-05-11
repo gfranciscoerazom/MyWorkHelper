@@ -8,11 +8,16 @@ import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
-import { AssetsSolicitation, TeamMember } from '@/types';
+import type { AssetsSolicitation, TeamMember } from '@/types';
 import { Form, Head, Link, router, usePage } from '@inertiajs/react';
 import { Trash } from 'lucide-react';
 
-export default function UpdateAssetsSolicitation({ team_members, assetsSolicitation }: { team_members: TeamMember[], assetsSolicitation: AssetsSolicitation }) {
+type UpdateAssetsSolicitationProps = {
+    readonly team_members: TeamMember[];
+    readonly assetsSolicitation: AssetsSolicitation;
+};
+
+export default function UpdateAssetsSolicitation({ team_members, assetsSolicitation }: UpdateAssetsSolicitationProps) {
     const { currentTeam } = usePage().props;
 
     if (!currentTeam) {
@@ -177,7 +182,7 @@ export default function UpdateAssetsSolicitation({ team_members, assetsSolicitat
     );
 }
 
-UpdateAssetsSolicitation.layout = (props: { currentTeam?: { slug: string } | null, assetsSolicitation: AssetsSolicitation }) => ({
+UpdateAssetsSolicitation.layout = (props: { currentTeam?: { slug: string; } | null, assetsSolicitation: AssetsSolicitation; }) => ({
     breadcrumbs: [
         {
             title: 'Assets Solicitations',

@@ -7,18 +7,17 @@ import { Input } from "../ui/input";
 import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 
-interface InputFieldProps {
-    name: string;
-    type: string;
-    label: string;
-    description?: string;
-    tabIndex?: number;
-    placeholder: string;
-    autoFocus?: boolean;
-    min?: number;
-    children?: ReactNode;
-
-}
+type InputFieldProps = {
+    readonly name: string;
+    readonly type: string;
+    readonly label: string;
+    readonly description?: string;
+    readonly tabIndex?: number;
+    readonly placeholder: string;
+    readonly autoFocus?: boolean;
+    readonly min?: number;
+    readonly children?: ReactNode;
+};
 
 type SharedFieldProps = ComponentPropsWithoutRef<typeof Input> &
     ComponentPropsWithoutRef<typeof Textarea> &

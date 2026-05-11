@@ -20,7 +20,7 @@ class AssetFactory extends Factory
     {
         return [
             'name' => fake()->sentence(2),
-            'description' => fake()->optional()->paragraph(1, true),
+            'description' => fake()->paragraph(1, true),
             'validation_rules' => fake()->optional()->randomElement([
                 // ['between:800,1024', 'dimensions:max_width=1024,max_height=768', 'dimensions:ratio=4/3', 'extension:jpg'],
                 [
