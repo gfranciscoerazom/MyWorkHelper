@@ -1,10 +1,7 @@
-import { Form, Head, Link, router, usePage } from '@inertiajs/react';
-import { Minus, Plus } from 'lucide-react';
-import { useState } from 'react';
 import { InputField } from '@/components/assets-solicitations/input-field';
 import { SwitchContainer } from '@/components/assets-solicitations/switch-container';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardAction, CardContent, CardHeader } from '@/components/ui/card';
 import { Field, FieldDescription, FieldGroup, FieldLegend, FieldSeparator, FieldSet } from '@/components/ui/field';
 import { SelectItem } from '@/components/ui/select';
 import { Spinner } from '@/components/ui/spinner';
@@ -12,6 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { TeamMember } from '@/types';
+import { Form, Head, Link, router, usePage } from '@inertiajs/react';
+import { Minus, Plus } from 'lucide-react';
+import { useState } from 'react';
 
 type CreateAssetsSolicitationProps = {
     readonly team_members: TeamMember[];
@@ -22,6 +22,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
 
     const [assetsFieldsSettings, setAssetsFieldsSettings] = useState([
         {
+            id: crypto.randomUUID(),
             required: true,
             size: true,
             dimensions: true,
@@ -98,7 +99,15 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                 </FieldDescription>
                                 {
                                     assetsFieldsSettings.map((settings, index) => (
-                                        <Card key={index}>
+                                        <Card key={settings.id}>
+                                            <CardHeader>
+                                                <CardAction>
+                                                    <Button type="button" variant="outline" onClick={() => setAssetsFieldsSettings((prev) => prev.filter((_, i) => i !== index))} disabled={assetsFieldsSettings.length === 1}>
+                                                        <Minus />
+                                                        Remove
+                                                    </Button>
+                                                </CardAction>
+                                            </CardHeader>
                                             <CardContent>
                                                 <FieldGroup>
                                                     {/* Asset Name */}
@@ -378,6 +387,7 @@ export default function CreateAssetsSolicitation({ team_members }: CreateAssetsS
                                     <Button type="button" onClick={() => setAssetsFieldsSettings((prev) => [
                                         ...prev,
                                         {
+                                            id: crypto.randomUUID(),
                                             required: true,
                                             size: true,
                                             dimensions: true,
