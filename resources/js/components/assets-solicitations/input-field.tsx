@@ -1,11 +1,17 @@
-import { useFormContext } from "@inertiajs/react";
-import type { ComponentPropsWithoutRef, JSX, ReactNode } from "react";
-import { toDottedName } from "@/lib/utils";
-import InputError from "../input-error";
-import { Field, FieldDescription, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
-import { Select, SelectContent, SelectGroup, SelectTrigger, SelectValue } from "../ui/select";
-import { Textarea } from "../ui/textarea";
+import { useFormContext } from '@inertiajs/react';
+import type { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
+import { toDottedName } from '@/lib/utils';
+import InputError from '../input-error';
+import { Field, FieldDescription, FieldLabel } from '../ui/field';
+import { Input } from '../ui/input';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectTrigger,
+    SelectValue,
+} from '../ui/select';
+import { Textarea } from '../ui/textarea';
 
 type InputFieldProps = {
     readonly name: string;
@@ -13,8 +19,7 @@ type InputFieldProps = {
     readonly label: string;
     readonly description?: string;
     readonly tabIndex?: number;
-    readonly placeholder: string;
-    readonly autoFocus?: boolean;
+    readonly placeholder?: string;
     readonly min?: number;
     readonly children?: ReactNode;
 };
@@ -27,17 +32,16 @@ export function InputField({
     name,
     type,
     label,
-    description = "",
+    description = '',
     tabIndex,
     placeholder,
-    autoFocus = false,
     children,
     ...rest
 }: InputFieldProps & Partial<SharedFieldProps>) {
     const form = useFormContext();
 
     if (!form) {
-        throw new Error("InputField must be used within a FormProvider");
+        throw new Error('InputField must be used within a FormProvider');
     }
 
     const dottedName = toDottedName(name);
@@ -49,7 +53,6 @@ export function InputField({
             <Textarea
                 id={name}
                 name={name}
-                autoFocus={autoFocus}
                 tabIndex={tabIndex}
                 onBlur={() => validate(dottedName)}
                 aria-invalid={invalid(dottedName)}
@@ -65,22 +68,18 @@ export function InputField({
                 aria-invalid={invalid(dottedName)}
                 {...rest}
             >
-                <SelectTrigger id={name} tabIndex={tabIndex} autoFocus={autoFocus}>
+                <SelectTrigger id={name} tabIndex={tabIndex}>
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectGroup>
-                        {children}
-                    </SelectGroup>
+                    <SelectGroup>{children}</SelectGroup>
                 </SelectContent>
             </Select>
         ),
-        // toggles: (),
         default: (
             <Input
                 id={name}
                 name={name}
-                autoFocus={autoFocus}
                 tabIndex={tabIndex}
                 onBlur={() => validate(dottedName)}
                 aria-invalid={invalid(dottedName)}
