@@ -27,7 +27,7 @@ export function SwitchContainer({
     ...rest
 }: SwitchContainerProps & Partial<SharedFieldProps>) {
     const [isChecked, setIsChecked] = useState<boolean>(
-        rest.defaultChecked ?? true,
+        rest.defaultChecked ?? false,
     );
 
     return (

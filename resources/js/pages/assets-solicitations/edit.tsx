@@ -1,6 +1,3 @@
-import { Form, Head, Link, router, usePage } from '@inertiajs/react';
-import { Minus, Plus, Trash } from 'lucide-react';
-import { useRef, useState } from 'react';
 import { AssetAllowedExtensions } from '@/components/assets-solicitations/asset-allowed-extensions';
 import { AssetDimensions } from '@/components/assets-solicitations/asset-dimensions';
 import { AssetQuantity } from '@/components/assets-solicitations/asset-quantity';
@@ -37,6 +34,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { AssetsSolicitation, TeamMember } from '@/types';
+import { Form, Head, Link, router, usePage } from '@inertiajs/react';
+import { Minus, Plus, Trash } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 type UpdateAssetsSolicitationProps = {
     readonly team_members: TeamMember[];
@@ -263,6 +263,11 @@ export default function UpdateAssetsSolicitation({
                                                             assetsSolicitation.assets
                                                         }
                                                     />
+                                                    {
+                                                        assetsSolicitation.assets[index]?.id && (
+                                                            <input type="hidden" name={`assets[${index}][id]`} defaultValue={assetsSolicitation.assets[index].id} />
+                                                        )
+                                                    }
                                                 </FieldGroup>
                                             </FieldGroup>
                                         </CardContent>
@@ -321,7 +326,7 @@ export default function UpdateAssetsSolicitation({
 }
 
 UpdateAssetsSolicitation.layout = (props: {
-    currentTeam?: { slug: string } | null;
+    currentTeam?: { slug: string; } | null;
     assetsSolicitation: AssetsSolicitation;
 }) => ({
     breadcrumbs: [
@@ -335,9 +340,9 @@ UpdateAssetsSolicitation.layout = (props: {
             title: `Edit ${props.assetsSolicitation.title}`,
             href: props.currentTeam
                 ? assetsSolicitations.edit({
-                      current_team: props.currentTeam.slug,
-                      assetsSolicitation: props.assetsSolicitation.id,
-                  })
+                    current_team: props.currentTeam.slug,
+                    assetsSolicitation: props.assetsSolicitation.id,
+                })
                 : '/',
         },
     ],

@@ -31,7 +31,7 @@ class StoreAssetsSolicitationRequest extends FormRequest
         return [
             'title' => FluentRule::string()->required()->min(5)->max(255),
             'description' => FluentRule::string()->required()->min(5),
-            'provider_id' => FluentRule::integer('provider id')->required()->exists('team_members', 'user_id'),
+            'provider_id' => FluentRule::integer('person responsible for providing the assets')->required()->exists('team_members', 'user_id'),
 
             'assets' => FluentRule::array()->required()->min(1)->each([
                 'name' => FluentRule::string('name')->required()->min(5)->max(255),

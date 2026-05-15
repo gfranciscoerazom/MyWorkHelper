@@ -1,6 +1,6 @@
+import { toDottedName } from '@/lib/utils';
 import { useFormContext } from '@inertiajs/react';
 import type { ComponentPropsWithoutRef, JSX, ReactNode } from 'react';
-import { toDottedName } from '@/lib/utils';
 import InputError from '../input-error';
 import { Field, FieldDescription, FieldLabel } from '../ui/field';
 import { Input } from '../ui/input';
@@ -65,10 +65,14 @@ export function InputField({
             <Select
                 name={name}
                 autoComplete={name}
-                aria-invalid={invalid(dottedName)}
                 {...rest}
             >
-                <SelectTrigger id={name} tabIndex={tabIndex}>
+                <SelectTrigger
+                    id={name}
+                    tabIndex={tabIndex}
+                    aria-invalid={invalid(dottedName)}
+                    onBlur={() => validate(dottedName)}
+                >
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>
                 <SelectContent>

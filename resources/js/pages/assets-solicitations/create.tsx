@@ -1,6 +1,3 @@
-import { Form, Head, Link, router, usePage } from '@inertiajs/react';
-import { Minus, Plus } from 'lucide-react';
-import { useRef, useState } from 'react';
 import { AssetAllowedExtensions } from '@/components/assets-solicitations/asset-allowed-extensions';
 import { AssetDimensions } from '@/components/assets-solicitations/asset-dimensions';
 import { AssetQuantity } from '@/components/assets-solicitations/asset-quantity';
@@ -27,6 +24,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { home } from '@/routes';
 import assetsSolicitations from '@/routes/assets-solicitations';
 import type { TeamMember } from '@/types';
+import { Form, Head, Link, router, usePage } from '@inertiajs/react';
+import { Minus, Plus } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 type CreateAssetsSolicitationProps = {
     readonly team_members: TeamMember[];
@@ -226,7 +226,7 @@ export default function CreateAssetsSolicitation({
 }
 
 CreateAssetsSolicitation.layout = (props: {
-    currentTeam?: { slug: string } | null;
+    currentTeam?: { slug: string; } | null;
 }) => ({
     breadcrumbs: [
         {

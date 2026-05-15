@@ -153,6 +153,18 @@ class AssetsSolicitationController extends Controller
 
         $assetsSolicitation->update($request->safe()->all());
 
+        $assets = collect($request->safe()->only('assets')['assets']);
+        $solicitationAssets = $assetsSolicitation->assets();
+
+        $existingAssets = $assets->whereNotNull('id')->all();
+        $newAssets = $assets->whereNull('id')->all();
+
+        foreach ($existingAssets as $asset) {
+            $solicitationAssets->where('id', $asset['id'])->update($asset);
+        }
+
+        $solicitationAssets->createMany($newAssets);
+
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Assets solicitation updated successfully.')]);
 
         return to_route('assets-solicitations.edit', [
